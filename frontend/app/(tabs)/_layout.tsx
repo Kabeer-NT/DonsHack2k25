@@ -9,6 +9,7 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
@@ -40,13 +41,6 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="dms"
-        options={{
-          title: 'DMs',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="classes"
         options={{
           title: 'Classes',
@@ -65,6 +59,13 @@ export default function TabLayout() {
         options={{
           title: 'Forum',
           tabBarIcon: ({ color }) => <Ionicons name="people" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: 'Account',
+          tabBarIcon: ({ color }) => <FontAwesome name="user-circle" size={24} color={color} />
         }}
       />
     </Tabs>

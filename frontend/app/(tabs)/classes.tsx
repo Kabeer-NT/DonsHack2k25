@@ -274,7 +274,7 @@ const ClassList = ({
   </SafeAreaProvider>
 );
 
-export default function TabThreeScreen() {
+export default function TabTwoScreen() {
 
   // TODO: create pop up from bottom with class info and option (similar to reddit)
   const handleClassPress = (item: ClassData) => {
