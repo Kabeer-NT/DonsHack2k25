@@ -8,8 +8,10 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY } from '@env';
+
 // Using Clerk for Login
-import { ClerkProvider } from '@clerk/clerk-expo';
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -35,7 +37,7 @@ export default function RootLayout() {
     <ClerkProvider tokenCache={tokenCache}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="auto" />
