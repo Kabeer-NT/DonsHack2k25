@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native'
+import { Text, TextInput, TouchableOpacity,Keyboard, View, StyleSheet,TouchableWithoutFeedback } from 'react-native'
 import { useSignUp } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
 
@@ -80,23 +80,36 @@ export default function SignUpScreen() {
   }
 
   return (
-    <View>
-      <>
-        <Text>Sign up</Text>
-        <TextInput
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Sign Up</Text>
+      
+      <TextInput
+          style={styles.input}
           autoCapitalize="none"
           value={emailAddress}
           placeholder="Enter email"
-          onChangeText={(email) => setEmailAddress(email)}
+          onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
         />
-        <TextInput
+
+        
+<TextInput
+          style={styles.input}
           value={password}
-          placeholder="Enter password"
+          placeholder="Enter a password"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
-        <TouchableOpacity onPress={onSignUpPress}>
-          <Text>Continue</Text>
+        <TextInput
+          style={styles.input}
+          value={password}
+          placeholder="Confirm your password"
+          secureTextEntry={true}
+          onChangeText={(password) => setPassword(password)}
+        />
+
+<TouchableOpacity style={styles.button} onPress={onSignUpPress}>
+          <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
         <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
           <Text>Already have an account?</Text>
@@ -104,8 +117,9 @@ export default function SignUpScreen() {
             <Text>Sign in</Text>
           </Link>
         </View>
-      </>
+ 
     </View>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -143,15 +157,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-  signInRow: {
+  signUpRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 6,
   },
-  signInText: {
+  signUpText: {
     fontSize: 14,
   },
-  signInLink: {
+  signUpLink: {
     fontSize: 14,
     color: 'cornflowerblue',
     fontWeight: '500',
