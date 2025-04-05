@@ -1,7 +1,9 @@
 import { useSignIn } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
-import { Text, TextInput, TouchableOpacity, View, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View, StyleSheet, Keyboard, TouchableWithoutFeedback, Image } from 'react-native'
 import React from 'react'
+
+const logo = require('@/assets/images/DonsHackLogo1.png');
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn()
@@ -10,39 +12,34 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = React.useState('')
   const [password, setPassword] = React.useState('')
 
-  // Handle the submission of the sign-in form
   const onSignInPress = async () => {
     if (!isLoaded) return
 
-    // Start the sign-in process using the email and password provided
     try {
       const signInAttempt = await signIn.create({
         identifier: emailAddress,
         password,
       })
 
-      // If sign-in process is complete, set the created session as active
-      // and redirect the user
       if (signInAttempt.status === 'complete') {
         await setActive({ session: signInAttempt.createdSessionId })
         router.replace('/')
       } else {
-        // If the status isn't complete, check why. User might need to
-        // complete further steps.
         console.error(JSON.stringify(signInAttempt, null, 2))
       }
     } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
     }
   }
 
   return (
-    // TouchableWithoutFeedback is for closing keyboard if field selected without 
-    // returning value (does not interfere with accessibility reader settings)
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
+        {/* Added logo container - matches sign-up page styling */}
+        <View style={styles.logoContainer}>
+          <Image source={logo} style={styles.logo}/>
+        </View>
+        
         <Text style={styles.title}>Sign In</Text>
 
         <TextInput
@@ -122,5 +119,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'cornflowerblue',
     fontWeight: '500',
+  },
+  // Added matching logo styles
+  logo: {
+    width: 150,
+    height: 75,
+    resizeMode: 'contain',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginLeft: 40,
+    marginRight: 40,
+    height: 90,
   },
 })
