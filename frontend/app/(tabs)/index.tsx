@@ -1,36 +1,38 @@
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo'
-import { Link } from 'expo-router'
-import { Text, View, StyleSheet, TouchableOpacity} from 'react-native'
+import { Link, useRouter } from 'expo-router'
+import { Text, View, StyleSheet, Pressable } from 'react-native'
 import { SignOutButton } from '../components/SignOutButton'
+
+import { useAuth } from "@clerk/clerk-expo";
 
 export default function Page() {
   const { user } = useUser()
+  const router = useRouter()
+
+  const { signOut } = useAuth();
+  const handleSignOut = async () => {
+    // alert("Signing out");
+    signOut
+    router.replace('/(auth)')
+  }
 
   return (
     <View style={styles.container}>
       <SignedIn>
-        <Text style={styles.text}>Hello {user?.emailAddresses[0].emailAddress}</Text>
-        <TouchableOpacity style={[styles.button, { backgroundColor: '#ff5c5c' }]}onPress={() => { alert('Signing Out'); }}>
-          <Text style={styles.buttonText}>Sign Out</Text>
-        </TouchableOpacity>
-        <SignOutButton />
+        {/* <Text style={styles.text}>Hello {user?.emailAddresses[0].emailAddress}</Text> */}
+        <Text style={styles.text}>Welcome to Socialite!</Text>
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            pressed && styles.buttonPressed,
+          ]}
+          onPress={handleSignOut}
+        >
+          <Text style={styles.text}>Sign Out</Text>
+        </Pressable>
       </SignedIn>
       <SignedOut>
-        <Text style={styles.welcomeText}>Welcome! Please sign in or sign up</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#0070f3' }]} onPress={() => {}}>
-            <Link href="/(auth)/sign-in">
-              <Text style={styles.buttonText}>Sign In</Text>
-            </Link>
-          </TouchableOpacity>
-
-          <View style={styles.spacing} />
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#00cc99' }]} onPress={() => {}}>
-            <Link href="/(auth)/sign-up">
-              <Text style={styles.buttonText}>Sign Up</Text>
-            </Link>
-          </TouchableOpacity>
-        </View>
+        {/* TODO redirect to login-page */}
       </SignedOut>
     </View>
   )
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   button: {
-    height: 50,
+    // height: 50,
     borderRadius: 25,
     marginBottom: 15,
     justifyContent: 'center', 
@@ -68,7 +70,12 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3.5,
-    elevation: 5,
+    // elevation: 5,
+    backgroundColor: "cornflowerblue",
+    padding: 10
+  },
+  buttonPressed: {
+    backgroundColor: "#E04343", // slightly darker on press
   },
   buttonText: {
     fontSize: 18,
