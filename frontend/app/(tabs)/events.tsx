@@ -1,11 +1,77 @@
-import { StyleSheet, Image, Platform } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
+import { StyleSheet, ScrollView, View, Text, TouchableOpacity, Platform } from 'react-native';
+//import { Collapsible } from '@/components/Collapsible';
+//import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+
+enum EventTag {
+  Fun = 'Fun',
+  Hard = 'Hard',
+  Music = 'Music',
+  Sports = 'Sports',
+  Academic = 'Academic',
+  Social = 'Social',
+  Other = 'Other'
+}
+
+type EventCard = {
+  id: string;
+  username: string;
+  eventName: string;
+  content: string;
+  likes: number;
+  tags: EventTag[];
+}
+
+const sampleEvents: EventCard[] = [
+  {
+    id: '1',
+    username: 'user123',
+    eventName: 'Campus Concert',
+    content: 'Join us for a night of music with local bands! Free entry for all students. Food and drinks will be available for purchase.',
+    likes: 42,
+    tags: [EventTag.Music, EventTag.Fun]
+  },
+  {
+    id: '2',
+    username: 'study_group',
+    eventName: 'Midterm Study Session',
+    content: 'Collaborative study session for CS101 midterm. Bring your notes! We\'ll have tutors available to help with difficult concepts.',
+    likes: 18,
+    tags: [EventTag.Academic, EventTag.Hard]
+  },
+  {
+    id: '3',
+    username: 'sports_club',
+    eventName: 'Intramural Basketball',
+    content: 'Sign up for the spring intramural basketball tournament. Teams of 5 needed. Registration closes Friday!',
+    likes: 35,
+    tags: [EventTag.Sports, EventTag.Fun]
+  },
+];
+const EventCardComponent = ({ event }: { event: EventCard }) => {
+  return (
+    <ThemedView style={styles.card}>
+      <ThemedText type="defaultSemiBold" style={styles.username}>@{event.username}</ThemedText>
+
+      <ThemedText type="title" style={styles.eventTitle}>{event.eventName}</ThemedText>
+
+      <ThemedText style={styles.content}>{event.content}</ThemedText>
+
+      <View style={styles.tagsContainer}>
+        {event.tags.map((tag, index) => (
+          <ThemedView key={index} style={styles.tag}>
+            <ThemedText style={styles.tagText}>{tag}</ThemedText>
+          </ThemedView>
+        ))}
+      </View>
+
+      <ThemedText style={styles.likes}>♥ {event.likes} likes</ThemedText>
+    </ThemedView>
+  );
+};
 
 export default function TabFourScreen() {
   return (
@@ -20,81 +86,17 @@ export default function TabFourScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
+        <ThemedText type="title">Events</ThemedText>
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
+      
+      <ScrollView contentContainerStyle={styles.eventsContainer}>
+        {sampleEvents.map(event => (
+          <EventCardComponent key={event.id} event={event} />
+        ))}
+      </ScrollView>
     </ParallaxScrollView>
   );
 }
-
 const styles = StyleSheet.create({
   headerImage: {
     color: '#808080',
@@ -105,5 +107,52 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+    marginBottom: 20,
+  },
+  eventsContainer: {
+    paddingBottom: 20,
+  },
+  card: {
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+ 
+  username: {
+    marginBottom: 8,
+  },
+  likes: {
+    color: '#ff4757',
+    textAlign: 'right', 
+    marginTop: 8, 
+  },
+  eventTitle: {
+    marginBottom: 12,
+    fontSize: 20,
+  },
+  content: {
+    marginBottom: 12,
+    lineHeight: 20,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 12,
+  },
+  tag: {
+    borderRadius: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: '#e0e0e0',
+  },
+  tagText: {
+    fontSize: 12,
+    color: '#555',
   },
 });

@@ -1,31 +1,48 @@
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo'
 import { Link } from 'expo-router'
-import { Text, View, StyleSheet, TouchableOpacity} from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { SignOutButton } from '../components/SignOutButton'
+
+const logo = require('@/assets/images/DonsHackLogo1.png');
 
 export default function Page() {
   const { user } = useUser()
 
   return (
     <View style={styles.container}>
+      {/* Added logo container - matches sign-in/sign-up styling */}
+      <View style={styles.logoContainer}>
+        <Image source={logo} style={styles.logo}/>
+      </View>
+
       <SignedIn>
         <Text style={styles.text}>Hello {user?.emailAddresses[0].emailAddress}</Text>
-        <TouchableOpacity style={[styles.button, { backgroundColor: '#ff5c5c' }]}onPress={() => { alert('Signing Out'); }}>
+        <TouchableOpacity 
+          style={[styles.button, { backgroundColor: '#ff5c5c' }]}
+          onPress={() => { alert('Signing Out'); }}
+        >
           <Text style={styles.buttonText}>Sign Out</Text>
         </TouchableOpacity>
         <SignOutButton />
       </SignedIn>
+
       <SignedOut>
-        <Text style={styles.welcomeText}>Welcome! Please sign in or sign up</Text>
+        <Text style={styles.welcomeText}>Welcome to Socialite! Please sign in or sign up</Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#0070f3' }]} onPress={() => {}}>
+          <TouchableOpacity 
+            style={[styles.button, { backgroundColor: '#0070f3' }]} 
+            onPress={() => {}}
+          >
             <Link href="/(auth)/sign-in">
               <Text style={styles.buttonText}>Sign In</Text>
             </Link>
           </TouchableOpacity>
 
           <View style={styles.spacing} />
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#00cc99' }]} onPress={() => {}}>
+          <TouchableOpacity 
+            style={[styles.button, { backgroundColor: '#00cc99' }]} 
+            onPress={() => {}}
+          >
             <Link href="/(auth)/sign-up">
               <Text style={styles.buttonText}>Sign Up</Text>
             </Link>
@@ -35,13 +52,25 @@ export default function Page() {
     </View>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center', // vertical centering
-    alignItems: 'center',     // horizontal centering
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
-     backgroundColor: '#f7f7f7',
+    backgroundColor: '#f7f7f7',
+  },
+  logo: {
+    width: 150,
+    height: 75,
+    resizeMode: 'contain',
+  },
+  logoContainer: {
+    position: 'absolute',
+    top: 225,
+    alignSelf: 'center',
+    paddingLeft:10,
   },
   text: {
     fontSize: 22,
@@ -50,7 +79,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeText: {
-    fontSize: 18,
+    fontSize: 17,
     color: '#333',
     marginBottom: 30,
   },

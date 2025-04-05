@@ -18,7 +18,6 @@ export default function SignUpScreen() {
   const onSignUpPress = async () => {
     if (!isLoaded) return
 
-    // Added password confirmation check
     if (password !== confirmPassword) {
       alert("Passwords don't match!")
       return
@@ -184,5 +183,6 @@ const styles = StyleSheet.create({
    marginLeft:40,
    marginRight:40,
 height:90,
+paddingLeft: 10,
   },
 })

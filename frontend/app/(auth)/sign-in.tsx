@@ -35,7 +35,7 @@ export default function Page() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
-        {/* Added logo container - matches sign-up page styling */}
+       
         <View style={styles.logoContainer}>
           <Image source={logo} style={styles.logo}/>
         </View>
@@ -120,13 +120,14 @@ const styles = StyleSheet.create({
     color: 'cornflowerblue',
     fontWeight: '500',
   },
-  // Added matching logo styles
+
   logo: {
     width: 150,
     height: 75,
     resizeMode: 'contain',
   },
   logoContainer: {
+    paddingLeft:10,
     alignItems: 'center',
     marginLeft: 40,
     marginRight: 40,
