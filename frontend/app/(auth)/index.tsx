@@ -15,7 +15,7 @@ export default function Page() {
         style={styles.logo} 
         resizeMode="contain"
       />
-      
+      <Text style={styles.bigTitle}>Socialite</Text>
       <Text style={styles.welcomeText}>Welcome! Please sign in or sign up</Text>
       
       <View style={styles.buttonContainer}>
@@ -47,8 +47,16 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 350,
-    height: 300,
-    marginBottom: 1,
+    height: 250,
+  },
+  bigTitle: {
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 42,
+    color: '#333',
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'center',
+    letterSpacing: 0.8,
   },
   welcomeText: {
     fontSize: 18,
