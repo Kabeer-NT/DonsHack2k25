@@ -425,11 +425,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-<<<<<<< HEAD
-    marginTop: 50,
-    marginBottom: 100,
-    // backgroundColor: '#f7f7f7',
-=======
     backgroundColor: '#f7f7f7',
   },
   logo: {
@@ -442,7 +437,6 @@ const styles = StyleSheet.create({
     top: 225,
     alignSelf: 'center',
     paddingLeft:10,
->>>>>>> sahil_frontend
   },
   text: {
     fontSize: 22,
