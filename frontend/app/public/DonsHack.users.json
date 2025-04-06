@@ -1,0 +1,342 @@
+[{
+  "_id": {
+    "$oid": "67f1ae8832c66212761d069f"
+  },
+  "clerk_id": "",
+  "username": "Mario",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [
+    "67f1ae8832c66212761d06a0",
+    "67f1ae8832c66212761d06a1",
+    "67f1ae8932c66212761d06a5",
+    "67f1ae8832c66212761d06a3",
+    "67f1ae8932c66212761d06a6"
+  ],
+  "classes": {
+    "taking": [],
+    "interested": [
+      "CS110"
+    ]
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  },
+  "events": [
+    "67f213e96e27aa2bb866f0d2",
+    "67f21a2e95d07e7ee97c0df1"
+  ],
+  "forum": [
+    "67f222d63085796dcc7a21a8"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67f1ae8832c66212761d06a0"
+  },
+  "clerk_id": "",
+  "username": "Luigi",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [
+    "67f1ae8832c66212761d069f",
+    "67f1ae8832c66212761d06a1"
+  ],
+  "classes": {
+    "taking": [],
+    "interested": [
+      "CS110"
+    ]
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  },
+  "events": [
+    "67f21a9c02a14baaa8d4212e"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67f1ae8832c66212761d06a1"
+  },
+  "clerk_id": "",
+  "username": "Princess Peach",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [
+    "67f1ae8832c66212761d069f"
+  ],
+  "classes": {
+    "taking": [
+      "CS111",
+      "CS112"
+    ],
+    "interested": []
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  }
+},
+{
+  "_id": {
+    "$oid": "67f1ae8832c66212761d06a2"
+  },
+  "clerk_id": "",
+  "username": "Bowser",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [
+    "67f1ae8932c66212761d06aa"
+  ],
+  "classes": {
+    "taking": [],
+    "interested": []
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  },
+  "events": [
+    "67f21d8a44b64041dd0378f4"
+  ],
+  "forum": [
+    "67f224091e468c92cd825f11"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67f1ae8832c66212761d06a3"
+  },
+  "clerk_id": "",
+  "username": "Donkey Kong",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [
+    "67f1ae8932c66212761d06a5",
+    "67f1ae8932c66212761d06a6"
+  ],
+  "classes": {
+    "taking": [
+      "CS245"
+    ],
+    "interested": [
+      "CS111"
+    ]
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  },
+  "forum": [
+    "67f225c9ba3ba6bb436a98ec"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67f1ae8832c66212761d06a4"
+  },
+  "clerk_id": "",
+  "username": "Shy Guy",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [],
+  "classes": {
+    "taking": [],
+    "interested": [
+      "CS245"
+    ]
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  }
+},
+{
+  "_id": {
+    "$oid": "67f1ae8932c66212761d06a5"
+  },
+  "clerk_id": "",
+  "username": "Toad",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [
+    "67f1ae8832c66212761d069f",
+    "67f1ae8832c66212761d06a0",
+    "67f1ae8832c66212761d06a1",
+    "67f1ae8832c66212761d06a3",
+    "67f1ae8932c66212761d06a6"
+  ],
+  "classes": {
+    "taking": [],
+    "interested": []
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  },
+  "forum": [
+    "67f225fa132801d8a5a75a12"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67f1ae8932c66212761d06a6"
+  },
+  "clerk_id": "",
+  "username": "Rosalina",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [
+    "67f1ae8932c66212761d06a5"
+  ],
+  "classes": {
+    "taking": [],
+    "interested": []
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  },
+  "events": [
+    "67f21b9a881eb2212ccccc6e"
+  ],
+  "forum": [
+    "67f22651702ec1d76fd0166d"
+  ]
+},
+{
+  "_id": {
+    "$oid": "67f1ae8932c66212761d06a7"
+  },
+  "clerk_id": "",
+  "username": "Waluigi",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [],
+  "classes": {
+    "taking": [
+      "CS221"
+    ],
+    "interested": [
+      "CS221"
+    ]
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  }
+},
+{
+  "_id": {
+    "$oid": "67f1ae8932c66212761d06a8"
+  },
+  "clerk_id": "",
+  "username": "Wario",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [],
+  "classes": {
+    "taking": [
+      "CS221"
+    ],
+    "interested": [
+      "CS221"
+    ]
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  }
+},
+{
+  "_id": {
+    "$oid": "67f1ae8932c66212761d06a9"
+  },
+  "clerk_id": "",
+  "username": "Koopa",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [],
+  "classes": {
+    "taking": [
+      "CS112"
+    ],
+    "interested": []
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  }
+},
+{
+  "_id": {
+    "$oid": "67f1ae8932c66212761d06aa"
+  },
+  "clerk_id": "",
+  "username": "Boo",
+  "pfp": "",
+  "conversations": [],
+  "tags": {
+    "events": [],
+    "forum": []
+  },
+  "friends": [],
+  "classes": {
+    "taking": [],
+    "interested": [
+      "CS111",
+      "CS245"
+    ]
+  },
+  "posts": {
+    "events": [],
+    "forum": []
+  }
+}]
