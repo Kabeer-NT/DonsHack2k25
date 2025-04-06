@@ -1,6 +1,4 @@
-import { StyleSheet, ScrollView, View, Text, TouchableOpacity, Platform } from 'react-native';
-//import { Collapsible } from '@/components/Collapsible';
-//import { ExternalLink } from '@/components/ExternalLink';
+import { StyleSheet, ScrollView, View, Alert, TouchableOpacity } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -51,25 +49,28 @@ const sampleEvents: EventCard[] = [
     tags: [EventTag.Sports, EventTag.Fun]
   },
 ];
+
 const EventCardComponent = ({ event }: { event: EventCard }) => {
+  const handlePress = () => {
+    Alert.alert('Hi', `You clicked ${event.eventName}`);
+  };
+
   return (
-    <ThemedView style={styles.card}>
-      <ThemedText type="defaultSemiBold" style={styles.username}>@{event.username}</ThemedText>
-
-      <ThemedText type="title" style={styles.eventTitle}>{event.eventName}</ThemedText>
-
-      <ThemedText style={styles.content}>{event.content}</ThemedText>
-
-      <View style={styles.tagsContainer}>
-        {event.tags.map((tag, index) => (
-          <ThemedView key={index} style={styles.tag}>
-            <ThemedText style={styles.tagText}>{tag}</ThemedText>
-          </ThemedView>
-        ))}
-      </View>
-
-      <ThemedText style={styles.likes}>♥ {event.likes} likes</ThemedText>
-    </ThemedView>
+    <TouchableOpacity onPress={handlePress} activeOpacity={0.8}>
+      <ThemedView style={styles.card}>
+        <ThemedText type="defaultSemiBold" style={styles.username}>@{event.username}</ThemedText>
+        <ThemedText type="title" style={styles.eventTitle}>{event.eventName}</ThemedText>
+        <ThemedText style={styles.content}>{event.content}</ThemedText>
+        <View style={styles.tagsContainer}>
+          {event.tags.map((tag, index) => (
+            <ThemedView key={index} style={styles.tag}>
+              <ThemedText style={styles.tagText}>{tag}</ThemedText>
+            </ThemedView>
+          ))}
+        </View>
+        <ThemedText style={styles.likes}>♥ {event.likes} likes</ThemedText>
+      </ThemedView>
+    </TouchableOpacity>
   );
 };
 
