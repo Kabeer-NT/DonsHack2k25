@@ -4,7 +4,8 @@ Image,
 FlatList,
 StatusBar,
 Text,
-TouchableOpacity, } from 'react-native';
+TouchableOpacity,
+ActivityIndicator, } from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -13,6 +14,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 
 import { useRouter } from 'expo-router'
+import React, { useState } from 'react';
 
 // Structure of a class
 type ClassData = {
@@ -276,7 +278,85 @@ onItemPress: (item: ClassData) => void;
 </SafeAreaProvider>
 );
 
+let myClassTaking: ClassData[] = [];
+let myClassInterested: ClassData[] = [];
+
+const fetchDataBeforeRender = async () => {
+  try {
+    // My Class Taking List
+    const response1 = await fetch('http://10.0.0.111:8080/get-my-class-taking-list');
+    if (!response1.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const result1 = await response1.json();
+    console.log()
+    myClassTaking = result1;
+
+    // My Class Interested List
+    const response2 = await fetch('http://10.0.0.111:8080/get-my-class-interested-list');
+    if (!response2.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const result2 = await response2.json();
+    console.log()
+    myClassInterested = result2;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+// Call fetchDataBeforeRender outside of the component before rendering
+fetchDataBeforeRender();
+
 export default function TabTwoScreen() {
+if (myClassTaking === null || myClassInterested === null) {
+    return <ActivityIndicator size="large" color="#0000ff" />;  // Loading state while fetching data
+}
+
+interface Student {
+    name: string;
+    pfp: string;
+    user_id: string;
+}
+
+interface ResponseData {
+    _id: string;
+    class_id: string;
+    location: string;
+    name: string;
+    num_students: number;
+    professor: string;
+    professor_image: string;
+    schedule: string;
+    students_interested: Student[];
+    students_taking: Student[];
+}
+
+const [responseData, setResponseData] = useState<ResponseData | null>(null);
+
+const handlePress = () => {
+    fetch('http://10.0.0.111:8080/get-test-class', {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    })
+    .then((response) => {
+        if (!response.ok) {
+        throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then((data) => {
+        const responseData: ResponseData = data;
+        setResponseData(responseData);
+        return data;
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
+};
+  
 
 const router = useRouter()
 // TODO: create pop up from bottom with class info and option (similar to reddit)
@@ -297,16 +377,18 @@ return (
         />
     }>
 
+    {/* <ThemedText type="title">{responseData?.class_id}</ThemedText> */}
+
     {/* MY CLASSES */}
     <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">My Classes</ThemedText>
     </ThemedView>
 
     <ThemedText type="subtitle">Taking</ThemedText>
-    <ClassList data={DATA} onItemPress={handleClassPress} />
+    <ClassList data={myClassTaking} onItemPress={handlePress} />
 
     <ThemedText type="subtitle">Interested</ThemedText>
-    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
+    <ClassList data={myClassInterested} onItemPress={handleClassPress} />
 
     {/* MY FRIEND'S CLASSES */}
     <ThemedView style={styles.titleContainer}>

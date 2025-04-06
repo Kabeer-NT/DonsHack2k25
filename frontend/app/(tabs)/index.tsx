@@ -1,6 +1,6 @@
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
-import { Text, View, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image, FlatList, ActivityIndicator } from 'react-native'
 import { SignOutButton } from '../components/SignOutButton'
 
 import { useAuth } from "@clerk/clerk-expo";
@@ -320,7 +320,29 @@ const EventCardComponent = ({ event }: { event: EventCard }) => {
   );
 };
 
+let myClassTaking: ClassData[] = [];
+
+const fetchDataBeforeRender = async () => {
+  try {
+    const response = await fetch('http://10.0.0.111:8080/get-my-class-taking-list');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const result = await response.json();
+    console.log()
+    myClassTaking = result;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+// Call fetchDataBeforeRender outside of the component before rendering
+fetchDataBeforeRender();
+
 export default function Page() {
+  if (myClassTaking === null) {
+      return <ActivityIndicator size="large" color="#0000ff" />;  // Loading state while fetching data
+  }
 
   const handleClassPress = (item: ClassData) => {
     console.log('Clicked class:', item.name); // temporary
@@ -339,14 +361,14 @@ export default function Page() {
           }>
       <ThemedText type="title">My Activity</ThemedText>
       <Collapsible title="">
-        <ThemedText type="title">My Events</ThemedText>
+        <ThemedText type="subtitle">My Events</ThemedText>
         <Collapsible title="">
           <ClassList data={DATA} onItemPress={handleClassPress} />
         </Collapsible>
 
         <View style={styles.divider} />
 
-        <ThemedText type="title">My Posts</ThemedText>
+        <ThemedText type="subtitle">My Posts</ThemedText>
         <Collapsible title="">
           <ClassList data={DATA} onItemPress={handleClassPress} />
         </Collapsible>
@@ -354,9 +376,9 @@ export default function Page() {
         <View style={styles.divider} />
 
 
-        <ThemedText type="title">My Classes</ThemedText>
+        <ThemedText type="subtitle">My Classes</ThemedText>
         <Collapsible title="">
-          <ClassList data={DATA} onItemPress={handleClassPress} />
+          <ClassList data={myClassTaking} onItemPress={handleClassPress} />
         </Collapsible>
 
         <View style={styles.divider} />
