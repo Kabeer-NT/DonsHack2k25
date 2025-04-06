@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from bson.objectid import ObjectId
 from datetime import datetime
 
+from query_classes import ClassCollection
+
 
 load_dotenv()
 
@@ -17,6 +19,8 @@ db = client["DonsHack"]
 users = db["users"]
 posts = db["posts"]
 events = db["events"]
+classes = db["classes"]
+
 
 def create_event(username, title, content, tags=None, people_going=None):
     # Retrieve the user from the users collection by username
@@ -178,19 +182,41 @@ def add_posts_to_user(username: str):
         print(f"User with username {username} not found")
         return 0
 
-# Function to get a list of all usernames
-def get_all_usernames():
-    try:
-        # Find all users and retrieve only the 'username' field
-        usernames = users.find({}, {"username": 1})
-        return [user["username"] for user in usernames]
-    except Exception as e:
-        print(f"Error fetching usernames: {e}")
-        return []
 
-for user in get_all_usernames():
-    add_events_to_user(user)
-    add_posts_to_user(user)
-    print("Added posts for ", user)
+# Function to update users' classes (taking/interested) from the classes schema
+def update_users_classes_from_classes():
+    try:
+        # Iterate through all classes
+        for class_data in classes.find():
+            class_id = class_data.get("class_id")
+            students_taking = class_data.get("students_taking", [])
+            students_interested = class_data.get("students_interested", [])
+            
+            # Update 'students_taking' for each student
+            for student in students_taking:
+                user = users.find_one({"username": student})
+                if user:
+                    # Update the user's 'classes.taking' field
+                    users.update_one(
+                        {"_id": user["_id"]},
+                        {"$addToSet": {"classes.taking": class_id}}
+                    )
+            
+            # Update 'students_interested' for each student
+            for student in students_interested:
+                user = users.find_one({"username": student})
+                if user:
+                    # Update the user's 'classes.interested' field
+                    users.update_one(
+                        {"_id": user["_id"]},
+                        {"$addToSet": {"classes.interested": class_id}}
+                    )
+        print("Successfully updated users' classes from the classes schema.")
+        return True
+    except Exception as e:
+        print(f"Error occurred while updating users' classes: {e}")
+        return False
+
+update_users_classes_from_classes()
 # Close the connection
 client.close()
