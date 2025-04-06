@@ -123,6 +123,10 @@ const classData = require('../../public/DonsHack.classes.json');
 const myClassTakingData = require('../../public/MyClassesTaking.json');
 const myClassInterestedData = require('../../public/MyClassesInterested.json');
 // TODO: add friends stuff
+const friend1 = require('../../public/FriendClassList.json');
+const friend2 = require('../../public/Friend1_classes.json');
+const friend3 = require('../../public/Friend2_classes.json');
+const friend4 = require('../../public/Friend4ClassList.json');
 
 return (
     <ParallaxScrollView
@@ -154,13 +158,13 @@ return (
     {/* TODO: create vertical list for displaying friends */}
 
     {/* TODO: create double list for friend's interested/taking */}
-    <ThemedText type="subtitle">Friend 1</ThemedText>
-    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
-    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
+    <ThemedText type="subtitle">Rosalina</ThemedText>
+    <ClassList data={friend1} onItemPress={handleClassPress} />
+    <ClassList data={friend2} onItemPress={handleClassPress} />
 
-    <ThemedText type="subtitle">Friend 2</ThemedText>
-    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
-    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
+    <ThemedText type="subtitle">Princess Peach</ThemedText>
+    <ClassList data={friend3} onItemPress={handleClassPress} />
+    <ClassList data={friend4} onItemPress={handleClassPress} />
 
     {/* TRENDING CLASSES */}
     <ThemedView style={styles.titleContainer}>

@@ -1,0 +1,22 @@
+[
+    {
+        "_id": {
+          "$oid": "67f15b4141b0e0a194830d4c"
+        },
+        "unique_class_id": 9,
+        "class_id": "CS245",
+        "name": "Data Structures and Algorithms",
+        "professor": "David Guy Brizan",
+        "professor_image": "url",
+        "location": "Education 103",
+        "schedule": "MWF 11:45am-12:50pm",
+        "students_taking": [
+          "Donkey Kong"
+        ],
+        "students_interested": [
+          "Shy Guy",
+          "Boo"
+        ],
+        "num_students": 1
+      }
+]
