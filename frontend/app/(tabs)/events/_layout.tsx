@@ -1,12 +1,16 @@
-import { Redirect, Stack } from 'expo-router'
-import { useAuth } from '@clerk/clerk-expo'
+import { Stack } from 'expo-router';
 
 export default function EventsRoutesLayout() {
-//   const { isSignedIn } = useAuth()
-
-//   if (isSignedIn) {
-//     return <Redirect href={'/'} />
-//   }
-
-  return <Stack />
+  return (
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen 
+        name="event-page" 
+        options={{ 
+          title: 'Event',
+          headerBackTitle: 'Back',
+        }} 
+      />
+    </Stack>
+  );
 }

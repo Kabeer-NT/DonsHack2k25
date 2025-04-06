@@ -57,8 +57,9 @@ const EventCardComponent = ({ event }: { event: EventCard }) => {
   const handlePress = () => {
     // routes user to the page of event they have clicked on
     // (includes back button in top left corner)
-    router.push('/(tabs)/events/event-page')
+    router.push(`/(tabs)/events/event-page?id=${event.id}`);
   };
+  
 
   return (
     <TouchableOpacity onPress={handlePress} activeOpacity={0.8}>
