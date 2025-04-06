@@ -16,56 +16,50 @@ enum EventTag {
   Other = 'Other'
 }
 
-type EventCard = {
+type User = {
+
+};
+type Comment = {
   id: string;
   username: string;
-  eventName: string;
   content: string;
   likes: number;
+};
+// type EventCard = {
+//   id: string;
+//   username: string;
+//   eventName: string;
+//   content: string;
+//   likes: number;
+//   tags: EventTag[];
+// }
+type EventCard = {
+  _id: string;
+  post_id: string;
+  poster_id: string;
+  poster_username: string;
+  poster_pfp: string;
+  title: string;
+  content: string;
   tags: EventTag[];
+  people_going: User[];
+  comments: Comment[];
 }
-
-const sampleEvents: EventCard[] = [
-  {
-    id: '1',
-    username: 'user123',
-    eventName: 'Campus Concert',
-    content: 'Join us for a night of music with local bands! Free entry for all students. Food and drinks will be available for purchase.',
-    likes: 42,
-    tags: [EventTag.Music, EventTag.Fun]
-  },
-  {
-    id: '2',
-    username: 'study_group',
-    eventName: 'Midterm Study Session',
-    content: 'Collaborative study session for CS101 midterm. Bring your notes! We\'ll have tutors available to help with difficult concepts.',
-    likes: 18,
-    tags: [EventTag.Academic, EventTag.Hard]
-  },
-  {
-    id: '3',
-    username: 'sports_club',
-    eventName: 'Intramural Basketball',
-    content: 'Sign up for the spring intramural basketball tournament. Teams of 5 needed. Registration closes Friday!',
-    likes: 35,
-    tags: [EventTag.Sports, EventTag.Fun]
-  },
-];
 
 const EventCardComponent = ({ event }: { event: EventCard }) => {
     const router = useRouter()
   const handlePress = () => {
     // routes user to the page of event they have clicked on
     // (includes back button in top left corner)
-    router.push(`/(tabs)/events/event-page?id=${event.id}`);
+    router.push(`/(tabs)/events/event-page?id=${event.post_id}`);
   };
   
 
   return (
     <TouchableOpacity onPress={handlePress} activeOpacity={0.8}>
       <ThemedView style={styles.card}>
-        <ThemedText type="defaultSemiBold" style={styles.username}>@{event.username}</ThemedText>
-        <ThemedText type="title" style={styles.eventTitle}>{event.eventName}</ThemedText>
+        <ThemedText type="defaultSemiBold" style={styles.username}>@{event.poster_username}</ThemedText>
+        <ThemedText type="title" style={styles.eventTitle}>{event.title}</ThemedText>
         <ThemedText style={styles.content}>{event.content}</ThemedText>
         <View style={styles.tagsContainer}>
           {event.tags.map((tag, index) => (
@@ -74,11 +68,14 @@ const EventCardComponent = ({ event }: { event: EventCard }) => {
             </ThemedView>
           ))}
         </View>
-        <ThemedText style={styles.likes}>♥ {event.likes} likes</ThemedText>
+        {/* <ThemedText style={styles.likes}>♥ {event.likes} likes</ThemedText> */}
+        <ThemedText style={styles.likes}>♥ 5 likes</ThemedText>
       </ThemedView>
     </TouchableOpacity>
   );
 };
+
+const eventsData:EventCard[] = require('../../public/DonsHack.events.json');
 
 export default function TabFourScreen() {
   return (
@@ -97,8 +94,8 @@ export default function TabFourScreen() {
       </ThemedView>
       
       <ScrollView contentContainerStyle={styles.eventsContainer}>
-        {sampleEvents.map(event => (
-          <EventCardComponent key={event.id} event={event} />
+        {eventsData.map(event => (
+          <EventCardComponent key={event.post_id} event={event} />
         ))}
       </ScrollView>
     </ParallaxScrollView>

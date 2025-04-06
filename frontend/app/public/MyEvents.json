@@ -1,0 +1,128 @@
+[
+    {
+      "_id": {
+        "$oid": "67f213e96e27aa2bb866f0d2"
+      },
+      "post_id": "67f213e96e27aa2bb866f0d1",
+      "poster_id": "67f1ae8832c66212761d069f",
+      "poster_username": "Mario",
+      "poster_pfp": "",
+      "title": "Little Bookstore Trip :-)",
+      "content": "Hey everyone \n, I am new to USF and was hoping to get to know some of y'all. I personally love reading books. There's this cute little bookstore on Haight. Would anyone be interested in maybe hanging out at the bookstore and maybe grabbing a meal afterwards? Would love to make friends.",
+      "tags": [
+        "off-campus",
+        "fun"
+      ],
+      "people_going": [],
+      "comments": [
+        {
+          "username": "Luigi",
+          "user_id": "67f1ae8832c66212761d06a0",
+          "pfp": "",
+          "message": "I love the bookstore on Haight, it's the best. Count me in",
+          "likes": [],
+          "created_at": "2025-04-06T05:40:57.425031Z",
+          "replies": [
+            {
+              "username": "Princess Peach",
+              "user_id": "67f1ae8832c66212761d06a1",
+              "pfp": "",
+              "message": "I wanna tag along too. There's this really cute cafe 2 blocks off the store.",
+              "likes": [],
+              "created_at": "2025-04-06T05:40:57.661729Z"
+            }
+          ]
+        },
+        {
+          "username": "Toad",
+          "user_id": "67f1ae8932c66212761d06a5",
+          "pfp": "",
+          "message": "The bookstore on Haight is amazing, but you'd love the one on Divisadero even more.",
+          "likes": [],
+          "created_at": "2025-04-06T05:40:57.502829Z",
+          "replies": [
+            {
+              "username": "Bowser",
+              "user_id": "67f1ae8832c66212761d06a2",
+              "pfp": "",
+              "message": "The Divisadero bookstore is the best in SF. Shoutout to @ComixExperience",
+              "likes": [],
+              "created_at": "2025-04-06T05:40:57.793658Z"
+            },
+            {
+              "username": "Wario",
+              "user_id": "67f1ae8932c66212761d06a8",
+              "pfp": "",
+              "message": "Look forward to seeing you",
+              "likes": [],
+              "created_at": "2025-04-06T06:09:33.114555Z"
+            }
+          ]
+        },
+        {
+          "username": "Boo",
+          "user_id": "67f1ae8932c66212761d06aa",
+          "pfp": "",
+          "message": "Hey, I would love to join you too, what time are you thinking of going? I am only free on the weekends :-(",
+          "likes": [],
+          "created_at": "2025-04-06T05:40:57.583480Z",
+          "replies": [
+            {
+              "username": "Mario",
+              "user_id": "67f1ae8832c66212761d069f",
+              "pfp": "",
+              "message": "I was thinking of going this saturday, you should totally tag along.",
+              "likes": [],
+              "created_at": "2025-04-06T05:40:57.914377Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "67f21a2e95d07e7ee97c0df1"
+      },
+      "post_id": "67f21a2e95d07e7ee97c0df0",
+      "poster_id": "67f1ae8832c66212761d069f",
+      "poster_username": "Mario",
+      "poster_pfp": "",
+      "title": "Dons Hack 2025",
+      "content": "Hey everyone, \nACM alongside WiT is hosting their 3rd Annual Dons Hack (April 4-6th). This years Dons Hack will be even grander and bigger than the previous years'. Register and create an amazing project with the chance to win amazing prizes. More details can be found on our website.",
+      "tags": [
+        "on-campus",
+        "competition"
+      ],
+      "people_going": [],
+      "comments": [
+        {
+          "username": "Rosalina",
+          "user_id": "67f1ae8932c66212761d06a6",
+          "pfp": "",
+          "message": "Yayy, Dons Hack is the best",
+          "likes": [],
+          "created_at": "2025-04-06T06:07:42.681606Z",
+          "replies": []
+        },
+        {
+          "username": "Toad",
+          "user_id": "67f1ae8932c66212761d06a5",
+          "pfp": "",
+          "message": "@ACM, @WiT you guys are the best.",
+          "likes": [],
+          "created_at": "2025-04-06T06:07:42.755161Z",
+          "replies": []
+        },
+        {
+          "username": "Boo",
+          "user_id": "67f1ae8932c66212761d06aa",
+          "pfp": "",
+          "message": "Super hyped, last years' one was a bang and this one will be even better",
+          "likes": [],
+          "created_at": "2025-04-06T06:07:42.832021Z",
+          "replies": []
+        }
+      ]
+    }
+  ]
+  

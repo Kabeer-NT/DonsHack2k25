@@ -1,0 +1,121 @@
+[
+    {
+      "_id": {
+        "$oid": "67f1ae8832c66212761d06a0"
+      },
+      "clerk_id": "",
+      "username": "Luigi",
+      "pfp": "",
+      "conversations": [],
+      "tags": {
+        "events": [],
+        "forum": []
+      },
+      "friends": [
+        "67f1ae8832c66212761d069f",
+        "67f1ae8832c66212761d06a1"
+      ],
+      "classes": {
+        "taking": [],
+        "interested": [
+          "CS110"
+        ]
+      },
+      "posts": {
+        "events": [],
+        "forum": []
+      },
+      "events": [
+        "67f21a9c02a14baaa8d4212e"
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "67f1ae8832c66212761d06a1"
+      },
+      "clerk_id": "",
+      "username": "Princess Peach",
+      "pfp": "",
+      "conversations": [],
+      "tags": {
+        "events": [],
+        "forum": []
+      },
+      "friends": [
+        "67f1ae8832c66212761d069f"
+      ],
+      "classes": {
+        "taking": [
+          "CS111",
+          "CS112"
+        ],
+        "interested": []
+      },
+      "posts": {
+        "events": [],
+        "forum": []
+      }
+    },
+    {
+      "_id": {
+        "$oid": "67f1ae8832c66212761d06a5"
+      },
+      "clerk_id": "",
+      "username": "Toad",
+      "pfp": "",
+      "conversations": [],
+      "tags": {
+        "events": [],
+        "forum": []
+      },
+      "friends": [
+        "67f1ae8832c66212761d069f",
+        "67f1ae8832c66212761d06a0",
+        "67f1ae8832c66212761d06a1",
+        "67f1ae8832c66212761d06a3",
+        "67f1ae8932c66212761d06a6"
+      ],
+      "classes": {
+        "taking": [],
+        "interested": []
+      },
+      "posts": {
+        "events": [],
+        "forum": []
+      },
+      "forum": [
+        "67f225fa132801d8a5a75a12"
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "67f1ae8832c66212761d06a6"
+      },
+      "clerk_id": "",
+      "username": "Rosalina",
+      "pfp": "",
+      "conversations": [],
+      "tags": {
+        "events": [],
+        "forum": []
+      },
+      "friends": [
+        "67f1ae8932c66212761d06a5"
+      ],
+      "classes": {
+        "taking": [],
+        "interested": []
+      },
+      "posts": {
+        "events": [],
+        "forum": []
+      },
+      "events": [
+        "67f21b9a881eb2212ccccc6e"
+      ],
+      "forum": [
+        "67f22651702ec1d76fd0166d"
+      ]
+    }
+  ]
+  

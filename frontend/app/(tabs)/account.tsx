@@ -272,6 +272,9 @@ const ClassList = ({
   </SafeAreaProvider>
 );
 
+const myFriendsData = require('../public/MyFriends.json');
+const notMyFriendsData = require('../public/NotMyFriends.json');
+
 export default function AccountPage() {
   const router = useRouter()
   const { signOut } = useAuth();
@@ -309,11 +312,11 @@ export default function AccountPage() {
       <View style={styles.divider} />
       <View style={styles.friendContainer}>
         <ThemedText type="title">My Friends</ThemedText>
-        <ClassList data={DATA} onItemPress={handleClassPress} />
+        <ClassList data={myFriendsData} onItemPress={handleClassPress} />
       </View>
       <View style={styles.friendContainer}>
         <ThemedText type="title">Add Friends</ThemedText>
-        <ClassList data={DATA} onItemPress={handleClassPress} />
+        <ClassList data={notMyFriendsData} onItemPress={handleClassPress} />
         {/* TODO: add vertical scroll to see the bottom, or fit to screen */}
       </View>
     </View>

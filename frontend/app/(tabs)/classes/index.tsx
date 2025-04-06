@@ -31,188 +31,7 @@ num_students: number;
 };
 
 // Current class data (TODO: move this to database)
-const DATA: ClassData[] = [
-{
-    "id": "1",
-    "class_id": "CS110",
-    "name": "Intro to CS I",
-    "professor": "Andrew Rothman",
-    "professor_image": "url",
-    "location": "Harney 148",
-    "schedule": "MW 4:45pm-6:25pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "2",
-    "class_id": "CS110",
-    "name": "Intro to CS I",
-    "professor": "Andrew Rothman",
-    "professor_image": "url",
-    "location": "Harney 148",
-    "schedule": "MW 6:30pm-8:15pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "3",
-    "class_id": "CS110",
-    "name": "Intro to CS I",
-    "professor": "Nancy Stevens",
-    "professor_image": "url",
-    "location": "Harney 148",
-    "schedule": "MW 11:15am-1:00pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "4",
-    "class_id": "CS110",
-    "name": "Intro to CS I",
-    "professor": "Kelsey Urgo",
-    "professor_image": "url",
-    "location": "Lo Schiavo 307",
-    "schedule": "TR 9:55am-11:40am",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "5",
-    "class_id": "CS110",
-    "name": "Intro to CS I",
-    "professor": "Julia Norfo",
-    "professor_image": "url",
-    "location": "Lo Schiavo G12",
-    "schedule": "TR 2:40pm-4:25pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "6",
-    "class_id": "CS111",
-    "name": "Foundations of Program Design",
-    "professor": "Edward Reese",
-    "professor_image": "url",
-    "location": "Lo Schiavo 307",
-    "schedule": "MW 12:10pm-1:55pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "7",
-    "class_id": "CS112",
-    "name": "Intro to CS II",
-    "professor": "Alark Joshi",
-    "professor_image": "url",
-    "location": "Lo Schiavo G12",
-    "schedule": "TR 9:55am-11:40am",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "8",
-    "class_id": "CS221",
-    "name": "C and Systems Programming",
-    "professor": "Paul Haskell",
-    "professor_image": "url",
-    "location": "Harney 148",
-    "schedule": "MW 9:20am-11:05am",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "9",
-    "class_id": "CS221",
-    "name": "C and Systems Programming",
-    "professor": "Paul Haskell",
-    "professor_image": "url",
-    "location": "Harney 148",
-    "schedule": "MW 1:10pm-2:55pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "10",
-    "class_id": "CS245",
-    "name": "Data Structures and Algorithms",
-    "professor": "David Guy Brizan",
-    "professor_image": "url",
-    "location": "Education 103",
-    "schedule": "MWF 11:45am-12:50pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "11",
-    "class_id": "CS256",
-    "name": "Career Prep",
-    "professor": "Jon Rahoi",
-    "professor_image": "url",
-    "location": "Lo Schiavo 307",
-    "schedule": "R 6:30pm-8:15pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "12",
-    "class_id": "CS272",
-    "name": "Software Development",
-    "professor": "Philip Peterson",
-    "professor_image": "url",
-    "location": "Harney 148",
-    "schedule": "TR 8:00am-9:45am",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "13",
-    "class_id": "CS315",
-    "name": "Computer Architecture",
-    "professor": "Gregory Benson",
-    "professor_image": "url",
-    "location": "Lo Schiavo 307",
-    "schedule": "TR 8:00am-9:45am",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "14",
-    "class_id": "CS345",
-    "name": "Programming Language Paradigms",
-    "professor": "Kristin Jones",
-    "professor_image": "url",
-    "location": "Education 103",
-    "schedule": "MWF 9:15am-10:20am",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-},
-{
-    "id": "15",
-    "class_id": "CS490",
-    "name": "Senior Team",
-    "professor": "Paul Haskell",
-    "professor_image": "url",
-    "location": "Lone Mountain Main 350",
-    "schedule": "MW 4:45pm-6:25pm",
-    "students_taking": [],
-    "students_interested": [],
-    "num_students": 0
-}
-]
+const DATA: ClassData[] = [];
 const EMPTY_DATA: ClassData[] = []; // Used for testing no items to display message
 
 // Properties of a class
@@ -365,6 +184,11 @@ const handleClassPress = (item: ClassData) => {
     console.log('Clicked class:', item.name); // temporary
 };
 
+const classData = require('../../public/DonsHack.classes.json');
+const myClassTakingData = require('../../public/MyClassesTaking.json');
+const myClassInterestedData = require('../../public/MyClassesInterested.json');
+// TODO: add friends stuff
+
 return (
     <ParallaxScrollView
     headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -385,10 +209,10 @@ return (
     </ThemedView>
 
     <ThemedText type="subtitle">Taking</ThemedText>
-    <ClassList data={myClassTaking} onItemPress={handlePress} />
+    <ClassList data={myClassTakingData} onItemPress={handlePress} />
 
     <ThemedText type="subtitle">Interested</ThemedText>
-    <ClassList data={myClassInterested} onItemPress={handleClassPress} />
+    <ClassList data={myClassInterestedData} onItemPress={handleClassPress} />
 
     {/* MY FRIEND'S CLASSES */}
     <ThemedView style={styles.titleContainer}>
@@ -415,7 +239,7 @@ return (
     */}
 
     <FlatList
-        data={DATA}
+        data={classData}
         renderItem={({item}) => (
         <Class
             item={item}

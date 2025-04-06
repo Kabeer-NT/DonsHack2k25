@@ -339,6 +339,12 @@ const fetchDataBeforeRender = async () => {
 // Call fetchDataBeforeRender outside of the component before rendering
 fetchDataBeforeRender();
 
+const myEventsData = require('../public/MyEvents.json');
+const myPostsData = require('../public/MyPosts.json');
+const myClassesData = require('../public/MyClassesTaking.json');
+const myFriendsActivityData = require('../public/MyFriendsActivity.json');
+
+
 export default function Page() {
   if (myClassTaking === null) {
       return <ActivityIndicator size="large" color="#0000ff" />;  // Loading state while fetching data
@@ -363,14 +369,14 @@ export default function Page() {
       <Collapsible title="">
         <ThemedText type="subtitle">My Events</ThemedText>
         <Collapsible title="">
-          <ClassList data={DATA} onItemPress={handleClassPress} />
+          <ClassList data={myEventsData} onItemPress={handleClassPress} />
         </Collapsible>
 
         <View style={styles.divider} />
 
         <ThemedText type="subtitle">My Posts</ThemedText>
         <Collapsible title="">
-          <ClassList data={DATA} onItemPress={handleClassPress} />
+          <ClassList data={myPostsData} onItemPress={handleClassPress} />
         </Collapsible>
 
         <View style={styles.divider} />
@@ -378,7 +384,7 @@ export default function Page() {
 
         <ThemedText type="subtitle">My Classes</ThemedText>
         <Collapsible title="">
-          <ClassList data={myClassTaking} onItemPress={handleClassPress} />
+          <ClassList data={myClassesData} onItemPress={handleClassPress} />
         </Collapsible>
 
         <View style={styles.divider} />
@@ -388,7 +394,7 @@ export default function Page() {
       <View>
         <ThemedText type="title">My Friend's Activity</ThemedText>
         <FlatList
-          data={DATA}
+          data={myFriendsActivityData}
           renderItem={({item}) => (
             <Class
               item={item}
