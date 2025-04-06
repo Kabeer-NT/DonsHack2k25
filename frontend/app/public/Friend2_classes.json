@@ -1,0 +1,30 @@
+[{
+    "_id": {
+      "$oid": "67f15b4141b0e0a194830d50"
+    },
+    "unique_class_id": 13,
+    "class_id": "CS345",
+    "name": "Programming Language Paradigms",
+    "professor": "Kristin Jones",
+    "professor_image": "url",
+    "location": "Education 103",
+    "schedule": "MWF 9:15am-10:20am",
+    "students_taking": [],
+    "students_interested": [],
+    "num_students": 0
+  },
+  {
+    "_id": {
+      "$oid": "67f15b4141b0e0a194830d51"
+    },
+    "unique_class_id": 14,
+    "class_id": "CS490",
+    "name": "Senior Team",
+    "professor": "Paul Haskell",
+    "professor_image": "url",
+    "location": "Lone Mountain Main 350",
+    "schedule": "MW 4:45pm-6:25pm",
+    "students_taking": [],
+    "students_interested": [],
+    "num_students": 0
+  }]
