@@ -9,6 +9,9 @@ from pymongo.server_api import ServerApi
 
 from bson.objectid import ObjectId
 
+from query_classes import ClassCollection
+from query_user import UserCollection
+
 load_dotenv()
 
 uri = os.getenv("MONGODB_HOST")
