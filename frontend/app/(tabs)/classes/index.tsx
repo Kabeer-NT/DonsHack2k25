@@ -19,6 +19,7 @@ import React, { useState } from 'react';
 // Structure of a class
 type ClassData = {
 id: string;
+unique_class_id: string;
 class_id: string;
 name: string;
 professor: string;
@@ -31,7 +32,6 @@ num_students: number;
 };
 
 // Current class data (TODO: move this to database)
-const DATA: ClassData[] = [];
 const EMPTY_DATA: ClassData[] = []; // Used for testing no items to display message
 
 // Properties of a class
@@ -90,7 +90,7 @@ onItemPress: (item: ClassData) => void;
             text_style={styles.message}
             />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.unique_class_id}
         />
     )}
     </SafeAreaView>
@@ -100,87 +100,22 @@ onItemPress: (item: ClassData) => void;
 let myClassTaking: ClassData[] = [];
 let myClassInterested: ClassData[] = [];
 
-const fetchDataBeforeRender = async () => {
-  try {
-    // My Class Taking List
-    const response1 = await fetch('http://10.0.0.111:8080/get-my-class-taking-list');
-    if (!response1.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const result1 = await response1.json();
-    console.log()
-    myClassTaking = result1;
-
-    // My Class Interested List
-    const response2 = await fetch('http://10.0.0.111:8080/get-my-class-interested-list');
-    if (!response2.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const result2 = await response2.json();
-    console.log()
-    myClassInterested = result2;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
-
-// Call fetchDataBeforeRender outside of the component before rendering
-fetchDataBeforeRender();
-
 export default function TabTwoScreen() {
 if (myClassTaking === null || myClassInterested === null) {
     return <ActivityIndicator size="large" color="#0000ff" />;  // Loading state while fetching data
 }
 
-interface Student {
+interface User {
     name: string;
     pfp: string;
     user_id: string;
-}
-
-interface ResponseData {
-    _id: string;
-    class_id: string;
-    location: string;
-    name: string;
-    num_students: number;
-    professor: string;
-    professor_image: string;
-    schedule: string;
-    students_interested: Student[];
-    students_taking: Student[];
-}
-
-const [responseData, setResponseData] = useState<ResponseData | null>(null);
-
-const handlePress = () => {
-    fetch('http://10.0.0.111:8080/get-test-class', {
-        method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-    })
-    .then((response) => {
-        if (!response.ok) {
-        throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then((data) => {
-        const responseData: ResponseData = data;
-        setResponseData(responseData);
-        return data;
-    })
-    .catch((error) => {
-        console.error('Error fetching data:', error);
-    });
-};
-  
+}  
 
 const router = useRouter()
 // TODO: create pop up from bottom with class info and option (similar to reddit)
 const handleClassPress = (item: ClassData) => {
-    router.push('/(tabs)/classes/class-page')
+    // router.push('/(tabs)/classes/class-page')
+    router.push(`/(tabs)/classes/class-page?id=${item.unique_class_id}`);
     console.log('Clicked class:', item.name); // temporary
 };
 
@@ -201,15 +136,13 @@ return (
         />
     }>
 
-    {/* <ThemedText type="title">{responseData?.class_id}</ThemedText> */}
-
     {/* MY CLASSES */}
     <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">My Classes</ThemedText>
     </ThemedView>
 
     <ThemedText type="subtitle">Taking</ThemedText>
-    <ClassList data={myClassTakingData} onItemPress={handlePress} />
+    <ClassList data={myClassTakingData} onItemPress={handleClassPress} />
 
     <ThemedText type="subtitle">Interested</ThemedText>
     <ClassList data={myClassInterestedData} onItemPress={handleClassPress} />
@@ -222,21 +155,17 @@ return (
 
     {/* TODO: create double list for friend's interested/taking */}
     <ThemedText type="subtitle">Friend 1</ThemedText>
-    <ClassList data={DATA} onItemPress={handleClassPress} />
-    <ClassList data={DATA} onItemPress={handleClassPress} />
+    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
+    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
 
     <ThemedText type="subtitle">Friend 2</ThemedText>
-    <ClassList data={DATA} onItemPress={handleClassPress} />
-    <ClassList data={DATA} onItemPress={handleClassPress} />
+    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
+    <ClassList data={EMPTY_DATA} onItemPress={handleClassPress} />
 
     {/* TRENDING CLASSES */}
     <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Trending Classes</ThemedText>
     </ThemedView>
-    {/* TODO: create vertical list for displaying all classes,
-        and make it reusable for potential search results.
-        (width of screen)
-    */}
 
     <FlatList
         data={classData}
@@ -248,7 +177,7 @@ return (
             text_style={styles.message}
         />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.unique_class_id}
         scrollEnabled={false} // Disable scroll on FlatList to make ScrollView the main scroller
     />
     </ParallaxScrollView>

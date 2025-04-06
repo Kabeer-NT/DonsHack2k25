@@ -2,6 +2,7 @@
     "_id": {
       "$oid": "67f15b4141b0e0a194830d51"
     },
+    "unique_class_id": 14,
     "class_id": "CS490",
     "name": "Senior Team",
     "professor": "Paul Haskell",
