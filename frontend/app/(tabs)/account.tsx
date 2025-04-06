@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, TouchableOpacity, Image, FlatList } from "react-native";
+import { View, Text, StyleSheet, Pressable, TouchableOpacity, Image, FlatList, ScrollView } from "react-native";
 import { useRouter } from 'expo-router'
 
 import { useAuth } from "@clerk/clerk-expo";
@@ -289,7 +289,7 @@ export default function AccountPage() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.bigContainer}>
       <View style={styles.profileContainer}>
         <Image
           source={require("../../assets/pfps/marioprofile.png")}
@@ -319,11 +319,17 @@ export default function AccountPage() {
         <ClassList data={notMyFriendsData} onItemPress={handleClassPress} />
         {/* TODO: add vertical scroll to see the bottom, or fit to screen */}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  bigContainer: {
+    marginBottom: 83,
+    flex: 1,
+    padding: 18,
+    backgroundColor: "#fff",
+  },
   container: {
     flex: 1,
     padding: 18, // lowered so the cards don't fall out the bottom...
