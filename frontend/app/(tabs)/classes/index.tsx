@@ -332,10 +332,19 @@ return (
         (width of screen)
     */}
 
-    <ClassList data={DATA} onItemPress={handleClassPress} />
-    <ClassList data={DATA} onItemPress={handleClassPress} />
-    <ClassList data={DATA} onItemPress={handleClassPress} />
-    <ClassList data={DATA} onItemPress={handleClassPress} />
+    <FlatList
+        data={DATA}
+        renderItem={({item}) => (
+        <Class
+            item={item}
+            onPress={() => handleClassPress(item)}
+            item_style={styles.item}
+            text_style={styles.message}
+        />
+        )}
+        keyExtractor={item => item.id}
+        scrollEnabled={false} // Disable scroll on FlatList to make ScrollView the main scroller
+    />
     </ParallaxScrollView>
 );
 }
