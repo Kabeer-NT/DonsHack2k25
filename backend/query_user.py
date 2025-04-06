@@ -10,6 +10,7 @@ from query_classes import ClassCollection
 
 load_dotenv()
 
+import os
 uri = os.getenv("MONGODB_HOST")
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client["DonsHack"]
