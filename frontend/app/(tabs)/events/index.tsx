@@ -22,7 +22,7 @@ type User = {
 type Comment = {
   id: string;
   username: string;
-  content: string;
+  message: string;
   likes: number;
 };
 

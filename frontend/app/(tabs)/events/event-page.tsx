@@ -6,68 +6,38 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 
+type User = {
+
+};
+
 type Comment = {
   id: string;
   username: string;
-  content: string;
+  message: string;
   likes: number;
 };
 
 type Event = {
-  id: string;
-  username: string;
-  eventName: string;
+  _id: string;
+  post_id: string;
+  poster_id: string;
+  poster_username: string;
+  poster_pfp: string;
+  title: string;
   content: string;
-  likes: number;
   tags: string[];
+  people_going: User[];
   comments: Comment[];
-};
+}
 
-const allEvents: Event[] = [
-  {
-    id: '1',
-    username: 'user123',
-    eventName: 'Campus Concert',
-    content: 'Join us for a night of music with local bands! Free entry for all students. Food and drinks will be available for purchase.',
-    likes: 42,
-    tags: ['Music', 'Fun'],
-    comments: [
-      { id: '1', username: 'music_lover', content: "Can't wait for this! Who's performing?", likes: 5 },
-      { id: '2', username: 'band_member', content: 'Our band will be there! Starts at 7pm.', likes: 12 },
-    ],
-  },
-  {
-    id: '2',
-    username: 'study_group',
-    eventName: 'Midterm Study Session',
-    content: 'Collaborative study session for CS101 midterm. Bring your notes! We\'ll have tutors available to help with difficult concepts.',
-    likes: 18,
-    tags: ['Academic', 'Hard'],
-    comments: [
-      { id: '3', username: 'cs_student', content: 'Will you cover recursion?', likes: 3 },
-      { id: '4', username: 'tutor_jane', content: 'Yes, we\'ll go over recursion and sorting algorithms', likes: 8 },
-    ],
-  },
-  {
-    id: '3',
-    username: 'sports_club',
-    eventName: 'Intramural Basketball',
-    content: 'Sign up for the spring intramural basketball tournament. Teams of 5 needed. Registration closes Friday!',
-    likes: 35,
-    tags: ['Sports', 'Fun'],
-    comments: [
-      { id: '5', username: 'baller', content: 'Looking for a team!', likes: 2 },
-      { id: '6', username: 'team_captain', content: 'We need one more player for our team', likes: 4 },
-    ],
-  },
-];
+const eventsData:Event[] = require('../../public/DonsHack.events.json');
 
 export default function EventPage() {
   const { id } = useLocalSearchParams();
   const [commentText, setCommentText] = useState('');
-  const [events, setEvents] = useState<Event[]>(allEvents);
+  const [events, setEvents] = useState<Event[]>(eventsData);
 
-  const currentEvent = events.find(event => event.id === id);
+  const currentEvent = events.find(event => event.post_id === id);
 
   if (!currentEvent) {
     return (
@@ -94,12 +64,12 @@ export default function EventPage() {
       const newComment = {
         id: Date.now().toString(),
         username: 'current_user',
-        content: commentText,
+        message: commentText,
         likes: 0,
       };
 
       const updatedEvents = events.map(event => {
-        if (event.id === id) {
+        if (event.post_id === id) {
           return {
             ...event,
             comments: [...event.comments, newComment],
@@ -114,23 +84,13 @@ export default function EventPage() {
   };
 
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }
-    >
+    <ScrollView style={styles.container}>
       <ThemedView style={styles.eventContainer}>
         <ThemedText type="defaultSemiBold" style={styles.username}>
-          @{currentEvent.username}
+          @{currentEvent.poster_username}
         </ThemedText>
         <ThemedText type="title" style={styles.eventTitle}>
-          {currentEvent.eventName}
+          {currentEvent.title}
         </ThemedText>
         <ThemedText style={styles.content}>{currentEvent.content}</ThemedText>
         <View style={styles.tagsContainer}>
@@ -140,7 +100,7 @@ export default function EventPage() {
             </ThemedView>
           ))}
         </View>
-        <ThemedText style={styles.likes}>♥ {currentEvent.likes} likes</ThemedText>
+        <ThemedText style={styles.likes}>♥ 5 likes</ThemedText>
       </ThemedView>
 
       <ThemedView style={styles.commentInputContainer}>
@@ -175,16 +135,20 @@ export default function EventPage() {
         {currentEvent.comments.map(comment => (
           <ThemedView key={comment.id} style={styles.comment}>
             <ThemedText type="defaultSemiBold">@{comment.username}</ThemedText>
-            <ThemedText style={styles.commentContent}>{comment.content}</ThemedText>
+            <ThemedText style={styles.commentContent}>{comment.message}</ThemedText>
             <ThemedText style={styles.commentLikes}>♥ {comment.likes}</ThemedText>
           </ThemedView>
         ))}
       </View>
-    </ParallaxScrollView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    marginBottom: 83,
+  },
   headerImage: {
     color: '#808080',
     bottom: -90,
@@ -247,6 +211,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#e0e0e0',
     marginBottom: 16,
+    borderRadius: 10,
   },
   commentInput: {
     flex: 1,
@@ -281,6 +246,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderColor: '#eee',
+    borderRadius: 10,
   },
   commentContent: {
     marginVertical: 8,
