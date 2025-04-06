@@ -72,7 +72,7 @@ const ClassList = ({
               text_style={styles.message}
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.clerk_id}
         />
       )}
     </SafeAreaView>
