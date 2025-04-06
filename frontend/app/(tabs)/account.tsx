@@ -31,6 +31,17 @@ type ClassProps = {
 
 const imageMap: Record<string, any>  = {
   'luigiprofile': require('../../assets/pfps/luigiprofile.png'),
+  'booprofile': require('../../assets/pfps/booprofile.png'),
+  'bowserprofile': require('../../assets/pfps/bowserprofile.png'),
+  'donkeykongprofile': require('../../assets/pfps/donkeykongprofile.png'),
+  'koopaprofile': require('../../assets/pfps/koopaprofile.png'),
+  'princesspeachprofile': require('../../assets/pfps/princesspeachprofile.png'),
+  'rosalinaprofile': require('../../assets/pfps/rosalinaprofile.png'),
+  'shyguyprofile': require('../../assets/pfps/shyguyprofile.png'),
+  'toadprofile': require('../../assets/pfps/toadprofile.png'),
+  'waluigiprofile': require('../../assets/pfps/waluigiprofile.png'),
+  'warioprofile': require('../../assets/pfps/warioprofile.png'),
+
   // Add more mappings as needed
 };
 

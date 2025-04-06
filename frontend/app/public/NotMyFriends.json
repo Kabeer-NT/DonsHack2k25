@@ -5,7 +5,7 @@
     },
     "clerk_id": "",
     "username": "Bowser",
-    "pfp": "",
+    "pfp": "bowserprofile",
     "conversations": [],
     "tags": {
       "events": [],
@@ -35,7 +35,7 @@
     },
     "clerk_id": "",
     "username": "Donkey Kong",
-    "pfp": "",
+    "pfp": "donkeykongprofile",
     "conversations": [],
     "tags": {
       "events": [],
@@ -67,7 +67,7 @@
     },
     "clerk_id": "",
     "username": "Shy Guy",
-    "pfp": "",
+    "pfp": "shyguyprofile",
     "conversations": [],
     "tags": {
       "events": [],
@@ -91,7 +91,7 @@
     },
     "clerk_id": "",
     "username": "Waluigi",
-    "pfp": "",
+    "pfp": "waluigiprofile",
     "conversations": [],
     "tags": {
       "events": [],
@@ -117,7 +117,7 @@
     },
     "clerk_id": "",
     "username": "Wario",
-    "pfp": "",
+    "pfp": "warioprofile",
     "conversations": [],
     "tags": {
       "events": [],
@@ -143,7 +143,7 @@
     },
     "clerk_id": "",
     "username": "Koopa",
-    "pfp": "",
+    "pfp": "koopaprofile",
     "conversations": [],
     "tags": {
       "events": [],
@@ -167,7 +167,7 @@
     },
     "clerk_id": "",
     "username": "Boo",
-    "pfp": "",
+    "pfp": "booprofile",
     "conversations": [],
     "tags": {
       "events": [],
