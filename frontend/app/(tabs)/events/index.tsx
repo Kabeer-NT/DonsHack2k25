@@ -4,6 +4,8 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 
+import { useRouter } from 'expo-router'
+
 enum EventTag {
   Fun = 'Fun',
   Hard = 'Hard',
@@ -51,8 +53,11 @@ const sampleEvents: EventCard[] = [
 ];
 
 const EventCardComponent = ({ event }: { event: EventCard }) => {
+    const router = useRouter()
   const handlePress = () => {
-    Alert.alert('Hi', `You clicked ${event.eventName}`);
+    // routes user to the page of event they have clicked on
+    // (includes back button in top left corner)
+    router.push('/(tabs)/events/event-page')
   };
 
   return (
