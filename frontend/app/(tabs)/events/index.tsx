@@ -6,15 +6,15 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 
 import { useRouter } from 'expo-router'
 
-enum EventTag {
-  Fun = 'Fun',
-  Hard = 'Hard',
-  Music = 'Music',
-  Sports = 'Sports',
-  Academic = 'Academic',
-  Social = 'Social',
-  Other = 'Other'
-}
+// enum EventTag {
+//   Fun = 'Fun',
+//   Hard = 'Hard',
+//   Music = 'Music',
+//   Sports = 'Sports',
+//   Academic = 'Academic',
+//   Social = 'Social',
+//   Other = 'Other'
+// }
 
 type User = {
 
@@ -25,14 +25,7 @@ type Comment = {
   content: string;
   likes: number;
 };
-// type EventCard = {
-//   id: string;
-//   username: string;
-//   eventName: string;
-//   content: string;
-//   likes: number;
-//   tags: EventTag[];
-// }
+
 type EventCard = {
   _id: string;
   post_id: string;
@@ -41,7 +34,7 @@ type EventCard = {
   poster_pfp: string;
   title: string;
   content: string;
-  tags: EventTag[];
+  tags: string[];
   people_going: User[];
   comments: Comment[];
 }

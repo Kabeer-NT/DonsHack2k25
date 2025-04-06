@@ -273,52 +273,93 @@ const ClassList = ({
   </SafeAreaProvider>
 );
 
-enum EventTag {
-  Fun = 'Fun',
-  Hard = 'Hard',
-  Music = 'Music',
-  Sports = 'Sports',
-  Academic = 'Academic',
-  Social = 'Social',
-  Other = 'Other'
-}
+type User = {
 
-type EventCard = {
+};
+type Comment = {
   id: string;
   username: string;
-  eventName: string;
   content: string;
   likes: number;
-  tags: EventTag[];
-}
-
-
-const EventCardComponent = ({ event }: { event: EventCard }) => {
-  const router = useRouter()
-  const handlePress = () => {
-    // routes user to the page of event they have clicked on
-    // (includes back button in top left corner)
-    router.push('/')
-  };
-
-  return (
-    <TouchableOpacity onPress={handlePress} activeOpacity={0.8}>
-      <ThemedView style={styles.card}>
-        <ThemedText type="defaultSemiBold" style={styles.username}>@{event.username}</ThemedText>
-        <ThemedText type="title" style={styles.eventTitle}>{event.eventName}</ThemedText>
-        <ThemedText style={styles.content}>{event.content}</ThemedText>
-        <View style={styles.tagsContainer}>
-          {event.tags.map((tag, index) => (
-            <ThemedView key={index} style={styles.tag}>
-              <ThemedText style={styles.tagText}>{tag}</ThemedText>
-            </ThemedView>
-          ))}
-        </View>
-        <ThemedText style={styles.likes}>♥ {event.likes} likes</ThemedText>
-      </ThemedView>
-    </TouchableOpacity>
-  );
 };
+
+// Properties of an Event
+type EventProps = {
+  item: EventCard;
+  onPress: () => void;
+  item_style: {};
+  text_style: {};
+};
+
+type EventCard = {
+  _id: string;
+  post_id: string;
+  poster_id: string;
+  poster_username: string;
+  poster_pfp: string;
+  title: string;
+  content: string;
+  tags: string[];
+  people_going: User[];
+  comments: Comment[];
+};
+
+const Event = ({item, onPress, item_style, text_style}: EventProps) => (
+  <TouchableOpacity onPress={onPress} style={item_style}>
+    <ThemedView style={item_style}>
+      <Image
+        source={{uri: item.poster_pfp}}
+        style={{
+          width: 50,
+          height: 50,
+          borderRadius: 25,
+          marginRight: 12,
+        }}
+      />
+      <Text style={[text_style, {fontWeight: 'bold'}]}>{item.poster_username}:</Text>
+      <Text style={[text_style, {fontWeight: 'bold'}]}>{item.title}</Text>
+
+      <Text style={text_style}>{item.content.slice(0,40)}...</Text>
+      <View style={styles.divider} />
+      <View style={styles.tagsContainer}>
+        <Text style={text_style}>{item.tags}</Text>
+        <Text style={text_style}>♥ 5 likes</Text>
+      </View>
+    </ThemedView>
+  </TouchableOpacity>
+);
+
+// Displaying a list of events
+const EventList = ({
+  data,
+  onItemPress,
+}: {
+  data: EventCard[];
+  onItemPress: (item: EventCard) => void;
+}) => (
+  <SafeAreaProvider>
+    <SafeAreaView>
+      {data.length === 0 ? (
+        <Text style={styles.message}>No items to display</Text>
+      ) : (
+        // Scrollable list of events
+        <FlatList
+          data={data}
+          horizontal={true} // scroll horizontally instead of vertically
+          renderItem={({item}) => (
+            <Event
+              item={item}
+              onPress={() => onItemPress(item)}
+              item_style={styles.item}
+              text_style={styles.message}
+            />
+          )}
+          keyExtractor={item => item.post_id}
+        />
+      )}
+    </SafeAreaView>
+  </SafeAreaProvider>
+);
 
 let myClassTaking: ClassData[] = [];
 
@@ -339,6 +380,8 @@ const fetchDataBeforeRender = async () => {
 // Call fetchDataBeforeRender outside of the component before rendering
 fetchDataBeforeRender();
 
+
+
 const myEventsData = require('../public/MyEvents.json');
 const myPostsData = require('../public/MyPosts.json');
 const myClassesData = require('../public/MyClassesTaking.json');
@@ -351,7 +394,12 @@ export default function Page() {
   }
 
   const handleClassPress = (item: ClassData) => {
-    console.log('Clicked class:', item.name); // temporary
+    const router = useRouter()
+    router.push(`/(tabs)/classes/class-page?id=${item.class_id}`);
+  };
+  const handleEventPress = (item: EventCard) => {
+    const router = useRouter()
+    router.push(`/(tabs)/events/event-page?id=${item.post_id}`);
   };
 
   return (
@@ -369,7 +417,7 @@ export default function Page() {
       <Collapsible title="">
         <ThemedText type="subtitle">My Events</ThemedText>
         <Collapsible title="">
-          <ClassList data={myEventsData} onItemPress={handleClassPress} />
+          <EventList data={myEventsData} onItemPress={handleEventPress} />
         </Collapsible>
 
         <View style={styles.divider} />
@@ -489,8 +537,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   divider: {
-    height: 4,
-    backgroundColor: "#eee",
+    height: 2,
+    backgroundColor: "black",
     marginVertical: 12,
   },
   titleContainer: {
