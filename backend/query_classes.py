@@ -68,3 +68,8 @@ class ClassCollection:
         except Exception as e:
             print(f"Error removing interested student: {e}")
             return 0
+        
+    # TODO get all classes in database
+
+    # TODO get my taking classes for specific user (given either userid or name or your choice)
+    # TODO get my interested classes for specific user (given either userid or name or your choice)
