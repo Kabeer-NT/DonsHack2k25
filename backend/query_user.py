@@ -7,6 +7,7 @@ from datetime import datetime
 
 from query_classes import ClassCollection
 
+import json
 
 load_dotenv()
 
@@ -81,8 +82,10 @@ class UserCollection:
         except Exception as e:
             print(f"Error retrieving Mario's posts: {e}")
             return []
-    # Function to get Mario's classes (username hardcoded)
-    def get_classes():
+        
+    import json
+
+    def get_classes_taking():
         try:
             # Hardcoding the username as "Mario"
             username = "Mario"
@@ -91,37 +94,56 @@ class UserCollection:
             mario = users.find_one({"username": username})
             
             if mario:
-                # Extract the class IDs from Mario's 'classes' field (both taking and interested)
+                # Extract the class IDs from Mario's 'classes.taking' field
                 classes_taking_ids = mario.get("classes", {}).get("taking", [])
-                classes_interested_ids = mario.get("classes", {}).get("interested", [])
                 
                 # Retrieve the classes from the classes collection
                 classes_taking_list = []
-                classes_interested_list = []
-                
                 for class_id in classes_taking_ids:
                     class_info = classes.find_one({"class_id": class_id})
                     if class_info:
                         classes_taking_list.append(class_info)
                 
+                # Convert the list to a JSON string and return
+                return json.dumps(classes_taking_list, default=str)
+            
+            else:
+                print(f"User {username} not found.")
+                return json.dumps([])  # Return an empty list as JSON
+        
+        except Exception as e:
+            print(f"Error retrieving Mario's classes (taking): {e}")
+            return json.dumps([])  # Return an empty list as JSON
+
+    def get_classes_interested():
+        try:
+            # Hardcoding the username as "Mario"
+            username = "Mario"
+            
+            # Fetch Mario's user document
+            mario = users.find_one({"username": username})
+            
+            if mario:
+                # Extract the class IDs from Mario's 'classes.interested' field
+                classes_interested_ids = mario.get("classes", {}).get("interested", [])
+                
+                # Retrieve the classes from the classes collection
+                classes_interested_list = []
                 for class_id in classes_interested_ids:
                     class_info = classes.find_one({"class_id": class_id})
                     if class_info:
                         classes_interested_list.append(class_info)
                 
-                return {"taking": classes_taking_list, "interested": classes_interested_list}
+                # Convert the list to a JSON string and return
+                return json.dumps(classes_interested_list, default=str)
             
             else:
                 print(f"User {username} not found.")
-                return {"taking": [], "interested": []}
+                return json.dumps([])  # Return an empty list as JSON
         
         except Exception as e:
-            print(f"Error retrieving Mario's classes: {e}")
-            return {"taking": [], "interested": []}
-
-
-
-
+            print(f"Error retrieving Mario's classes (interested): {e}")
+            return json.dumps([])  # Return an empty list as JSON
 
     # Get Marios Events in a list in JSON format
     # Get marios posts in a list in Json Format
