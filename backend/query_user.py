@@ -1,183 +1,134 @@
-# from pymongo.collection import Collection
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+from dotenv import load_dotenv
+
 from bson.objectid import ObjectId
+from datetime import datetime
+
+from query_classes import ClassCollection
+
+
+load_dotenv()
+
+uri = os.getenv("MONGODB_HOST")
+client = MongoClient(uri, server_api=ServerApi('1'))
+db = client["DonsHack"]
+
+users = db["users"]
+posts = db["posts"]
+events = db["events"]
+classes = db["classes"]
 
 class UserCollection:
     def __init__(self, collection):
         self.collection = collection
 
-    # Find user by user_id
-    def find_by_user_id(self, user_id: str):
+    # Function to get my events
+    def get_events(self):
         try:
-            return self.collection.find_one({"user_id": user_id})
+            # Hardcoding the username as "Mario"
+            username = "Mario"
+            
+            # Fetch Mario's user document
+            mario = users.find_one({"username": username})
+            
+            if mario:
+                # Extract the event IDs from Mario's 'events' field
+                event_ids = mario.get("events", [])
+                
+                # Retrieve the events from the events collection
+                events_list = []
+                for event_id in event_ids:
+                    event = events.find_one({"_id": ObjectId(event_id)})
+                    if event:
+                        events_list.append(event)
+                return events_list
+            
+            else:
+                print(f"User {username} not found.")
+                return []
+        
         except Exception as e:
-            print(f"Error fetching user: {e}")
-            return None
+            print(f"Error retrieving Mario's events: {e}")
+            return []
 
-    # Get user details (including username, pfp, etc.)
-    def get_user_details(self, user_id: str):
-        user = self.find_by_user_id(user_id)
-        if user:
-            return {
-                "user_id": user.get("user_id"),
-                "username": user.get("username"),
-                "pfp": user.get("pfp"),
-                "tags": user.get("tags", {}),
-                "friends": user.get("friends", []),
-                "classes": user.get("classes", {}),
-                "posts": user.get("posts", {}),
-                "conversations": user.get("conversations", [])
-            }
-        return None
-
-    # Update user details
-    def update_user_details(self, user_id: str, updates: dict):
+    # Function to get Mario's posts (username hardcoded)
+    def get_posts():
         try:
-            result = self.collection.update_one({"user_id": user_id}, {"$set": updates})
-            return result.modified_count
+            # Hardcoding the username as "Mario"
+            username = "Mario"
+            
+            # Fetch Mario's user document
+            mario = users.find_one({"username": username})
+            
+            if mario:
+                # Extract the post IDs from Mario's 'posts' field
+                post_ids = mario.get("posts", [])
+                
+                # Retrieve the posts from the posts collection
+                posts_list = []
+                for post_id in post_ids:
+                    post = posts.find_one({"_id": ObjectId(post_id)})
+                    if post:
+                        posts_list.append(post)
+                return posts_list
+            
+            else:
+                print(f"User {username} not found.")
+                return []
+        
         except Exception as e:
-            print(f"Error updating user: {e}")
-            return 0
-
-    # Add a new conversation for the user
-    def add_conversation(self, user_id: str, conversation_id: str):
+            print(f"Error retrieving Mario's posts: {e}")
+            return []
+    # Function to get Mario's classes (username hardcoded)
+    def get_classes():
         try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$addToSet": {"conversations": conversation_id}}
-            )
-            return result.modified_count
+            # Hardcoding the username as "Mario"
+            username = "Mario"
+            
+            # Fetch Mario's user document
+            mario = users.find_one({"username": username})
+            
+            if mario:
+                # Extract the class IDs from Mario's 'classes' field (both taking and interested)
+                classes_taking_ids = mario.get("classes", {}).get("taking", [])
+                classes_interested_ids = mario.get("classes", {}).get("interested", [])
+                
+                # Retrieve the classes from the classes collection
+                classes_taking_list = []
+                classes_interested_list = []
+                
+                for class_id in classes_taking_ids:
+                    class_info = classes.find_one({"class_id": class_id})
+                    if class_info:
+                        classes_taking_list.append(class_info)
+                
+                for class_id in classes_interested_ids:
+                    class_info = classes.find_one({"class_id": class_id})
+                    if class_info:
+                        classes_interested_list.append(class_info)
+                
+                return {"taking": classes_taking_list, "interested": classes_interested_list}
+            
+            else:
+                print(f"User {username} not found.")
+                return {"taking": [], "interested": []}
+        
         except Exception as e:
-            print(f"Error adding conversation: {e}")
-            return 0
+            print(f"Error retrieving Mario's classes: {e}")
+            return {"taking": [], "interested": []}
 
-    # Remove a conversation for the user
-    def remove_conversation(self, user_id: str, conversation_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$pull": {"conversations": conversation_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error removing conversation: {e}")
-            return 0
 
-    # Add a tag to the user
-    def add_tag(self, user_id: str, category: str, tag: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$addToSet": {f"tags.{category}": tag}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error adding tag: {e}")
-            return 0
 
-    # Remove a tag from the user
-    def remove_tag(self, user_id: str, category: str, tag: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$pull": {f"tags.{category}": tag}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error removing tag: {e}")
-            return 0
 
-    # Add a friend to the user
-    def add_friend(self, user_id: str, friend_user_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$addToSet": {"friends": friend_user_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error adding friend: {e}")
-            return 0
 
-    # Remove a friend from the user
-    def remove_friend(self, user_id: str, friend_user_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$pull": {"friends": friend_user_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error removing friend: {e}")
-            return 0
+    # Get Marios Events in a list in JSON format
+    # Get marios posts in a list in Json Format
+    # Get Marios Classes (separate for taking and interested) 
+    # Get all of Mario's friends list and ! friends list 
+    # Get each friends class list taken and interested
+    # Get all classes (Query Class)
+    # Given a person, add/remove from friends list
 
-    # Add a class to the 'taking' list
-    def add_class_taking(self, user_id: str, class_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$addToSet": {"classes.taking": class_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error adding class to taking list: {e}")
-            return 0
-
-    # Remove a class from the 'taking' list
-    def remove_class_taking(self, user_id: str, class_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$pull": {"classes.taking": class_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error removing class from taking list: {e}")
-            return 0
-
-    # Add a class to the 'interested' list
-    def add_class_interested(self, user_id: str, class_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$addToSet": {"classes.interested": class_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error adding class to interested list: {e}")
-            return 0
-
-    # Remove a class from the 'interested' list
-    def remove_class_interested(self, user_id: str, class_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$pull": {"classes.interested": class_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error removing class from interested list: {e}")
-            return 0
-
-    # Add a post to the user's 'events' or 'forum' posts
-    def add_post(self, user_id: str, category: str, post_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$addToSet": {f"posts.{category}": post_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error adding post: {e}")
-            return 0
-
-    # Remove a post from the user's 'events' or 'forum' posts
-    def remove_post(self, user_id: str, category: str, post_id: str):
-        try:
-            result = self.collection.update_one(
-                {"user_id": user_id},
-                {"$pull": {f"posts.{category}": post_id}}
-            )
-            return result.modified_count
-        except Exception as e:
-            print(f"Error removing post: {e}")
-            return 0
+    #given some class information return people taking/interested in said class
+    #given some class information add/remove Mario's taking/interested && add class to mario's taking/interested list, update num people too
