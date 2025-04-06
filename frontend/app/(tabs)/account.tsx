@@ -29,12 +29,18 @@ type ClassProps = {
   text_style: {};
 };
 
+const imageMap: Record<string, any>  = {
+  'luigiprofile': require('../../assets/pfps/luigiprofile.png'),
+  // Add more mappings as needed
+};
+
 // Displaying a class
 const Class = ({item, onPress, item_style, text_style}: ClassProps) => (
   <TouchableOpacity onPress={onPress} style={item_style}>
     <ThemedView style={item_style}>
       <Image
-        source={{uri: item.pfp}}
+        // require("../../assets/pfps/marioprofile.png")
+        source={imageMap[item.pfp]}
         style={{
           width: 50,
           height: 50,
@@ -92,7 +98,7 @@ export default function AccountPage() {
   }
 
   const handleClassPress = (item: ClassData) => {
-    console.log('Clicked class:', item.name); // temporary
+    console.log('Clicked class:', item.username); // temporary
   };
 
   return (
