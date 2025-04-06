@@ -1,1 +1,54 @@
-[]
+[{
+    "_id": {
+      "$oid": "67f222d63085796dcc7a21a8"
+    },
+    "post_id": "67f222d63085796dcc7a21a7",
+    "poster_id": "67f1ae8832c66212761d069f",
+    "poster_username": "Mario",
+    "poster_pfp": "",
+    "title": "Gourmet Cafe Food",
+    "content": "Had the chicken in the cafe earlier today, safe to say I have officially gotten salmonella. Thanks USF",
+    "tags": [
+      "on-campus",
+      "food"
+    ],
+    "people_going": [],
+    "comments": [
+      {
+        "username": "Luigi",
+        "user_id": "67f1ae8832c66212761d06a0",
+        "pfp": "",
+        "message": "damn, this is why you never have cafe chicken.",
+        "likes": [],
+        "created_at": "2025-04-06T06:44:38.440159Z",
+        "replies": [
+          {
+            "username": "Rosalina",
+            "user_id": "67f1ae8932c66212761d06a6",
+            "pfp": "",
+            "message": "I just stick to the salad bar, it's the safest option",
+            "likes": [],
+            "created_at": "2025-04-06T06:44:38.658317Z"
+          }
+        ]
+      },
+      {
+        "username": "Shy Guy",
+        "user_id": "67f1ae8832c66212761d06a4",
+        "pfp": "",
+        "message": "RIP",
+        "likes": [],
+        "created_at": "2025-04-06T06:44:38.518095Z",
+        "replies": []
+      },
+      {
+        "username": "Princess Peach",
+        "user_id": "67f1ae8832c66212761d06a1",
+        "pfp": "",
+        "message": "I'm so sorry to hear that, hope you get better",
+        "likes": [],
+        "created_at": "2025-04-06T06:44:38.591508Z",
+        "replies": []
+      }
+    ]
+  }]
