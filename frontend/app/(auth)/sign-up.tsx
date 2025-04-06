@@ -1,7 +1,9 @@
 import * as React from 'react'
-import { Text, TextInput, TouchableOpacity,Keyboard, View, StyleSheet,TouchableWithoutFeedback } from 'react-native'
+import { Text, TextInput, TouchableOpacity, Keyboard, View, StyleSheet, TouchableWithoutFeedback, Image } from 'react-native'
 import { useSignUp } from '@clerk/clerk-expo'
 import { Link, useRouter } from 'expo-router'
+
+const logo = require('@/assets/images/DonsHackLogo1.png');
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp()
@@ -9,82 +11,76 @@ export default function SignUpScreen() {
 
   const [emailAddress, setEmailAddress] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [confirmPassword, setConfirmPassword] = React.useState('')
   const [pendingVerification, setPendingVerification] = React.useState(false)
   const [code, setCode] = React.useState('')
 
-  // Handle submission of sign-up form
   const onSignUpPress = async () => {
     if (!isLoaded) return
 
-    // Start sign-up process using email and password provided
+    if (password !== confirmPassword) {
+      alert("Passwords don't match!")
+      return
+    }
+
     try {
       await signUp.create({
         emailAddress,
         password,
       })
 
-      // Send user an email with verification code
       await signUp.prepareEmailAddressVerification({ strategy: 'email_code' })
-
-      // Set 'pendingVerification' to true to display second form
-      // and capture OTP code
       setPendingVerification(true)
     } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
     }
   }
 
-  // Handle submission of verification form
   const onVerifyPress = async () => {
     if (!isLoaded) return
 
     try {
-      // Use the code the user provided to attempt verification
       const signUpAttempt = await signUp.attemptEmailAddressVerification({
         code,
       })
 
-      // If verification was completed, set the session to active
-      // and redirect the user
       if (signUpAttempt.status === 'complete') {
         await setActive({ session: signUpAttempt.createdSessionId })
         router.replace('/(tabs)')
       } else {
-        // If the status is not complete, check why. User may need to
-        // complete further steps.
         console.error(JSON.stringify(signUpAttempt, null, 2))
       }
     } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
     }
   }
 
   if (pendingVerification) {
     return (
-      <>
-        <Text>Verify your email</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>Verify your email</Text>
         <TextInput
+          style={styles.input}
           value={code}
           placeholder="Enter your verification code"
           onChangeText={(code) => setCode(code)}
         />
-        <TouchableOpacity onPress={onVerifyPress}>
-          <Text>Verify</Text>
+        <TouchableOpacity style={styles.button} onPress={onVerifyPress}>
+          <Text style={styles.buttonText}>Verify</Text>
         </TouchableOpacity>
-      </>
+      </View>
     )
   }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
+      <View style={styles.logoContainer}>
+          <Image source={logo} style={styles.logo}/>
+        </View>
         <Text style={styles.title}>Sign Up</Text>
       
-      <TextInput
+        <TextInput
           style={styles.input}
           autoCapitalize="none"
           value={emailAddress}
@@ -92,33 +88,33 @@ export default function SignUpScreen() {
           onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
         />
 
-        
-<TextInput
+        <TextInput
           style={styles.input}
           value={password}
           placeholder="Enter a password"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
+        
         <TextInput
           style={styles.input}
-          value={password}
+          value={confirmPassword}
           placeholder="Confirm your password"
           secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
+          onChangeText={(password) => setConfirmPassword(password)}
         />
 
-<TouchableOpacity style={styles.button} onPress={onSignUpPress}>
+        <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
-        <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-          <Text>Already have an account?</Text>
+        
+        <View style={styles.signUpRow}>
+          <Text style={styles.signUpText}>Already have an account?</Text>
           <Link href="/sign-in">
-            <Text>Sign in</Text>
+            <Text style={styles.signInLink}>Sign In</Text>
           </Link>
         </View>
- 
-    </View>
+      </View>
     </TouchableWithoutFeedback>
   )
 }
@@ -164,10 +160,29 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     fontSize: 14,
+    //paddingTop:20,
   },
-  signUpLink: {
+  signInLink: {
     fontSize: 14,
     color: 'cornflowerblue',
     fontWeight: '500',
+  },
+  logo: {
+    width: 150,
+    height: 75,
+    //marginBottom: 20,
+    
+    resizeMode: 'contain',
+  },
+  logoContainer: {
+    //position: 'absolute',
+   // top: 40,
+   // right: 20,
+   // zIndex: 10,
+   alignItems: 'center',
+   marginLeft:40,
+   marginRight:40,
+height:90,
+paddingLeft: 10,
   },
 })

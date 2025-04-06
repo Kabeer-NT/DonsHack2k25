@@ -412,6 +412,7 @@ export default function Page() {
     </ParallaxScrollView>
   )
 }
+
 const styles = StyleSheet.create({
   headerImage: {
     color: '#808080',
@@ -421,12 +422,27 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'center', // vertical centering
-    alignItems: 'center',     // horizontal centering
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
+<<<<<<< HEAD
     marginTop: 50,
     marginBottom: 100,
     // backgroundColor: '#f7f7f7',
+=======
+    backgroundColor: '#f7f7f7',
+  },
+  logo: {
+    width: 150,
+    height: 75,
+    resizeMode: 'contain',
+  },
+  logoContainer: {
+    position: 'absolute',
+    top: 225,
+    alignSelf: 'center',
+    paddingLeft:10,
+>>>>>>> sahil_frontend
   },
   text: {
     fontSize: 22,
@@ -435,7 +451,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeText: {
-    fontSize: 18,
+    fontSize: 17,
     color: '#333',
     marginBottom: 30,
   },
