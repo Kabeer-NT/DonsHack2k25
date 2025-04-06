@@ -2,6 +2,7 @@
   "_id": {
     "$oid": "67f0e4148839b5b67e2ce4bb"
   },
+  "unique_class_id": 1,
   "class_id": "CS110",
   "name": "Intro to CS I",
   "professor": "Andrew Rothman",
@@ -46,6 +47,7 @@
   "_id": {
     "$oid": "67f1564d4ba1a6516eb7a3ea"
   },
+  "unique_class_id": 2,
   "class_id": "CS110",
   "name": "Intro to CS I",
   "professor": "Andrew Rothman",
@@ -60,6 +62,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d45"
   },
+  "unique_class_id": 3,
   "class_id": "CS110",
   "name": "Intro to Computer Science I",
   "professor": "Nancy Stevens",
@@ -77,6 +80,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d46"
   },
+  "unique_class_id": 4,
   "class_id": "CS110",
   "name": "Intro to Computer Science I",
   "professor": "Kelsey Urgo",
@@ -94,6 +98,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d48"
   },
+  "unique_class_id": 5,
   "class_id": "CS111",
   "name": "Foundations of Program Design",
   "professor": "Edward Reese",
@@ -113,6 +118,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d49"
   },
+  "unique_class_id": 6,
   "class_id": "CS112",
   "name": "Intro to Computer Science II",
   "professor": "Alark Joshi",
@@ -130,6 +136,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d4a"
   },
+  "unique_class_id": 7,
   "class_id": "CS221",
   "name": "C and Systems Programming",
   "professor": "Paul Haskell",
@@ -148,6 +155,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d4b"
   },
+  "unique_class_id": 8,
   "class_id": "CS221",
   "name": "C and Systems Programming",
   "professor": "Paul Haskell",
@@ -166,6 +174,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d4c"
   },
+  "unique_class_id": 9,
   "class_id": "CS245",
   "name": "Data Structures and Algorithms",
   "professor": "David Guy Brizan",
@@ -185,6 +194,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d4d"
   },
+  "unique_class_id": 10,
   "class_id": "CS256",
   "name": "Career Prep",
   "professor": "Jon Rahoi",
@@ -199,6 +209,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d4e"
   },
+  "unique_class_id": 11,
   "class_id": "CS272",
   "name": "Software Development",
   "professor": "Philip Peterson",
@@ -213,6 +224,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d4f"
   },
+  "unique_class_id": 12,
   "class_id": "CS315",
   "name": "Computer Architecture",
   "professor": "Gregory Benson",
@@ -227,6 +239,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d50"
   },
+  "unique_class_id": 13,
   "class_id": "CS345",
   "name": "Programming Language Paradigms",
   "professor": "Kristin Jones",
@@ -241,6 +254,7 @@
   "_id": {
     "$oid": "67f15b4141b0e0a194830d51"
   },
+  "unique_class_id": 14,
   "class_id": "CS490",
   "name": "Senior Team",
   "professor": "Paul Haskell",
